@@ -2,7 +2,7 @@
 import { useTheme } from '@/hooks/useTheme'
 import { Menu, Moon, Sun } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import Logo from './Logo'
 
 const Navbar = () => {
 
@@ -10,21 +10,32 @@ const Navbar = () => {
 
     const links =
         <>
-
+            <li>
+                <Link href="/">Home</Link>
+            </li>
+            <li>
+                <Link href="/services">Services</Link>
+            </li>
+            <li>
+                <Link href="/contact">Contact</Link>
+            </li>
+            <li>
+                <Link href="/"></Link>
+            </li>
         </>
 
     return (
         <div className="navbar bg-base-200 shadow-sm sticky top-0 z-50">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                    <div tabIndex={0} role="button" className="px-3 lg:hidden">
                         <Menu />
                     </div>
                     <ul tabIndex="-1" className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         {links}
                     </ul>
                 </div>
-                <a className="text-2xl font-oleo bg-linear-to-r from-[#89f7fe] to-[#66a6ff] bg-clip-text text-transparent font-bold cursor-pointer">Careify</a>
+                <Logo />
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
