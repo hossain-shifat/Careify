@@ -10,22 +10,14 @@ const Navbar = () => {
 
     const links =
         <>
-            <li>
-                <Link href="/">Home</Link>
-            </li>
-            <li>
-                <Link href="/services">Services</Link>
-            </li>
-            <li>
-                <Link href="/contact">Contact</Link>
-            </li>
-            <li>
-                <Link href="/"></Link>
-            </li>
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/services">Services</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/"></Link></li>
         </>
 
     return (
-        <div className="navbar bg-base-200 shadow-sm sticky top-0 z-50">
+        <div className="navbar bg-base-200 shadow-sm sticky top-0 z-50 md:px-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="px-3 lg:hidden">
@@ -35,7 +27,7 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <Logo />
+                <Logo/>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
