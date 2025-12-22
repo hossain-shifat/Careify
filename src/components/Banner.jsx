@@ -22,7 +22,7 @@ const Banner = () => {
             if (!isDragging) {
                 setCurrentSlide((prev) => (prev + 1) % banners.length);
             }
-        }, 2000);
+        }, 2500);
 
         return () => clearInterval(timer);
     }, [banners.length, isDragging]);
