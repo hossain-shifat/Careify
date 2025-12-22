@@ -1,15 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-/* banner only */
-:root {
-  --grid-color: #d1dcf0;
-}
-
-[data-theme="dark"] {
-  --grid-color: rgba(100, 100, 100, 0.6);
-}
-
 @plugin "daisyui/theme" {
   name: "light";
   default: false;
