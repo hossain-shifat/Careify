@@ -1,5 +1,6 @@
 import React from 'react';
 import { Baby, Users, HeartPulse, Accessibility } from 'lucide-react';
+import Heading from '@/components/Heading';
 
 const services = [
     {
@@ -41,8 +42,8 @@ const OurService = () => {
         <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-base-200">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-8 sm:mb-12 md:mb-16">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-base-content mb-2 sm:mb-3">Our Services</h2>
-                    <p className="text-base-content/60 text-sm sm:text-base max-w-2xl mx-auto px-4"> Professional care services tailored to meet your family&apos;s unique needs</p>
+                    <Heading title='Our Services'/>
+                    <p className="text-base-content/60 text-sm sm:text-base max-w-2xl mx-auto px-4">Professional care services tailored to meet your family&apos;s unique needs</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 *:shadow-md *:hover:shadow-xl *:hover:shadow-accent">
                     {services.map((service) => {

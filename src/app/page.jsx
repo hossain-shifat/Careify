@@ -3,6 +3,7 @@ import Image from "next/image";
 import About from "./About/page";
 import OurSuccess from "./OurSuccess/page";
 import OurService from "./OurService/page";
+import HowItWorks from "./HowITWorks/page";
 
 export default function Home() {
     return (
@@ -12,6 +13,7 @@ export default function Home() {
                 <About />
                 <OurService />
                 <OurSuccess />
+                <HowItWorks />
             </div>
         </div>
     );
