@@ -73,7 +73,7 @@ export default function OurSuccess() {
                         {successMetrics.map((metric, index) => {
                             const Icon = metric.icon;
                             return (
-                                <div key={index} className="bg-base-100 rounded-box p-6 text-center shadow-md hover:shadow-xl hover:shadow-accent/20 transition-all duration-300 border border-base-300" >
+                                <div key={index} className="bg-base-100 rounded-box p-6 text-center shadow-md hover:shadow-xl hover:shadow-accent transition-all duration-300 border border-base-300" >
                                     <div className="flex justify-center mb-3"> <Icon className={`w-10 h-10 ${metric.color}`} /> </div>
                                     <div className="text-3xl font-bold text-base-content mb-2"> {metric.value} </div>
                                     <div className="text-base-content/70 font-medium"> {metric.label} </div>
@@ -90,7 +90,7 @@ export default function OurSuccess() {
                     </div>
                     <div className="grid md:grid-cols-2 gap-8">
                         {testimonials.map((testimonial, index) => (
-                            <div key={index} className="bg-base-100 rounded-box p-6 shadow-md hover:shadow-xl hover:shadow-accent/20 transition-all duration-300 border border-base-300" >
+                            <div key={index} className="bg-base-100 rounded-box p-6 shadow-md hover:shadow-xl hover:shadow-accent transition-all duration-300 border border-base-300" >
                                 <div className="flex gap-1 mb-4">
                                     {[...Array(testimonial.rating)].map((_, i) => (
                                         <Star key={i} className="w-5 h-5 fill-warning text-warning" />
