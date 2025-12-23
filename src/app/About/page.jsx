@@ -45,7 +45,7 @@ const About = () => {
                     {features.map((feature, index) => {
                         const Icon = feature.icon;
                         return (
-                            <div key={index} className="bg-base-200 rounded-box p-6 shadow-md hover:shadow-2xl hover:shadow-accent/20 transition-all duration-300 border border-base-300" >
+                            <div key={index} className="bg-base-200 rounded-box p-6 shadow-md hover:shadow-2xl hover:shadow-accent transition-all duration-300 border border-base-300" >
                                 <div className="bg-accent/10 w-14 h-14 rounded-full flex items-center justify-center mb-4"><Icon className="w-7 h-7 text-accent" /></div>
                                 <h4 className="text-xl font-semibold text-base-content mb-2">{feature.title}</h4>
                                 <p className="text-base-content/80 leading-relaxed">{feature.description}</p>

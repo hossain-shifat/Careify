@@ -4,6 +4,7 @@ import About from "./About/page";
 import OurSuccess from "./OurSuccess/page";
 import OurService from "./OurService/page";
 import HowItWorks from "./HowITWorks/page";
+import FAQ from "./FAQ/FAQ";
 
 export default function Home() {
     return (
@@ -14,6 +15,7 @@ export default function Home() {
                 <OurService />
                 <OurSuccess />
                 <HowItWorks />
+                <FAQ />
             </div>
         </div>
     );
