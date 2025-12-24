@@ -1,6 +1,7 @@
 import React from 'react';
 import { Baby, Users, Stethoscope, Heart, Moon, MessageCircle, Star, ChevronRight, MapPin, Clock } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const iconMap = {
     Baby: Baby,
@@ -16,25 +17,16 @@ const ServiceCard = ({ service }) => {
 
     return (
         <div className="card bg-base-200 shadow-xl hover:shadow-2xl hover:shadow-accent/40 transition-all duration-300 hover:-translate-y-1">
-            {/* Service Image */}
             <figure className="relative h-48 overflow-hidden">
-                <img
-                    src={service.serviceImage}
-                    alt={service.serviceName}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                />
-
-                {/* Available Badge */}
+                <Image src={service.serviceImage} alt={service.serviceName} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover transition-transform duration-300 hover:scale-110" priority={false}/>
                 {service.available && (
-                    <div className="absolute top-4 right-4 badge badge-success gap-2">
+                    <div className="absolute top-4 right-4 badge badge-success gap-2 z-10">
                         <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                        Available
+                        <h1>Available</h1>
                     </div>
                 )}
             </figure>
-
             <div className="card-body">
-                {/* Header with Icon and Title */}
                 <div className="flex items-start gap-3 mb-2">
                     <div className="p-2 bg-accent/10 rounded-lg">
                         <Icon className="w-6 h-6 text-accent" />
@@ -48,13 +40,9 @@ const ServiceCard = ({ service }) => {
                         </p>
                     </div>
                 </div>
-
-                {/* Description */}
                 <p className="text-base-content/70 text-sm line-clamp-2 mb-3">
                     {service.shortDescription}
                 </p>
-
-                {/* Stats */}
                 <div className="flex items-center gap-4 mb-3 text-sm">
                     <div className="flex items-center gap-1">
                         <Star className="w-4 h-4 text-warning fill-warning" />
@@ -65,16 +53,12 @@ const ServiceCard = ({ service }) => {
                         <span>{service.totalReviews} reviews</span>
                     </div>
                 </div>
-
-                {/* Experience */}
                 <div className="flex items-center gap-2 mb-3">
                     <Clock className="w-4 h-4 text-base-content/60" />
                     <span className="text-sm text-base-content/70">
                         Experience: {service.experienceRequired}
                     </span>
                 </div>
-
-                {/* Pricing */}
                 <div className="divider my-2"></div>
                 <div className="flex items-center justify-between mb-4">
                     <div>
@@ -84,27 +68,16 @@ const ServiceCard = ({ service }) => {
                         <p className="text-xs text-base-content/60">per hour</p>
                     </div>
                     <div className="text-right">
-                        <p className="text-lg font-semibold">
-                            ৳{service.pricePerDay}
-                        </p>
-                        <p className="text-xs text-base-content/60">
-                            per day (8hrs)
-                        </p>
+                        <p className="text-lg font-semibold">৳{service.pricePerDay}</p>
+                        <p className="text-xs text-base-content/60">per day (8hrs)</p>
                     </div>
                 </div>
-
-                {/* Action Buttons */}
                 <div className="card-actions justify-between items-center mt-auto">
-                    <Link
-                        href={`/service/${service._id}`}
-                        className="btn btn-ghost btn-sm gap-2"
-                    >
-                        Learn More
+                    <Link href={`/service/${service._id}`} className="button btn-sm gap-2">
+                        Book Now
                         <ChevronRight className="w-4 h-4" />
                     </Link>
-
-                    <Link href={`/booking/${service._id}`} className="button btn-sm gap-2"> Book Now
-                        <ChevronRight className="w-4 h-4" />
+                    <Link href={`/booking/${service._id}`} className="button btn-sm gap-2"> View Details <ChevronRight className="w-4 h-4" />
                     </Link>
                 </div>
             </div>
