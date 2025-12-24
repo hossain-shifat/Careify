@@ -21,13 +21,13 @@ const Navbar = () => {
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="px-3 lg:hidden">
-                        <Menu />
+                        <Menu className={theme === 'light' ? 'text-black' : 'text-white'} />
                     </div>
                     <ul tabIndex="-1" className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         {links}
                     </ul>
                 </div>
-                <Logo/>
+                <Logo />
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -40,15 +40,15 @@ const Navbar = () => {
                         {
                             theme === 'light'
                                 ?
-                                <Moon size={22} />
+                                <Moon size={22} stroke='black' />
                                 :
                                 <Sun className="text-yellow-400" size={22} />
                         }
                     </button>
                 </div>
                 <div className="flex gap-2">
-                    <button className="btn btn-primary font-bold">Login</button>
-                    <button className="btn btn-primary font-bold">Register</button>
+                    <button className="btn btn-accent font-bold text-white">Login</button>
+                    <Link href='/register' className="btn btn-accent font-bold text-white">Register</Link>
                 </div>
             </div>
         </div>

@@ -11,14 +11,14 @@
   --color-base-100: #E0E8F6; /* light bluish background */
   --color-base-200: oklch(98% 0 0);  /* very light gray for surfaces */
   --color-base-300: oklch(95% 0 0);  /* light gray for cards/sections */
-  --color-base-content: #484E53; /* main text color */
+  --color-base-content: #fffff; /* main text color */
 
   /* Primary / Accent / Secondary */
   --color-primary: oklch(50% 0.24 277);
   --color-primary-content: oklch(93% 0.034 272.7);
   --color-secondary: oklch(70% 0.2 355);
   --color-secondary-content: oklch(94% 0.03 342);
-  --color-accent: #484E53;
+  --color-accent: #4FC3F7;
   --color-accent-content: oklch(38% 0.06 188);
 
   /* Neutral / Feedback */
