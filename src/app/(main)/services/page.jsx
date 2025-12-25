@@ -1,6 +1,7 @@
 import ServiceCard from '@/components/ServiceCard'
 import { getServices } from '@/lib/getServices'
 
+
 const ServicesPage = async () => {
     const services = await getServices()
 

@@ -77,7 +77,7 @@ const ServiceCard = ({ service }) => {
                         Book Now
                         <ChevronRight className="w-4 h-4" />
                     </Link>
-                    <Link href={`/booking/${service._id}`} className="button btn-sm gap-2"> View Details <ChevronRight className="w-4 h-4" />
+                    <Link href={`/services/${service._id}`} className="button btn-sm gap-2"> View Details <ChevronRight className="w-4 h-4" />
                     </Link>
                 </div>
             </div>
