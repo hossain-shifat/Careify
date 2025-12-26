@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
@@ -9,8 +9,9 @@ import { Eye, EyeOff, User, Mail, IdCard, Phone, Lock, EyeClosed } from "lucide-
 
 export default function RegisterPage() {
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const callbackUrl = searchParams.get("callbackUrl") || "/";
+    // const searchParams = useSearchParams();
+    // const callbackUrl = searchParams.get("callbackUrl") || "/";
+    const callbackUrl = "/";
 
     const {
         register,
