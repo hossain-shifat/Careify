@@ -1,6 +1,6 @@
-// app/api/bookings/route.js
 import { NextResponse } from 'next/server';
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
+import { sendInvoiceEmail } from '@/lib/sendInvoiceEmail';
 
 const uri = process.env.MONGODB_URI;
 
@@ -9,8 +9,7 @@ export async function POST(request) {
 
     try {
         const bookingData = await request.json();
-
-        // Validate required fields
+        
         if (!bookingData.serviceId || !bookingData.customerInfo?.email) {
             return NextResponse.json(
                 { error: 'Missing required fields' },
@@ -18,20 +17,26 @@ export async function POST(request) {
             );
         }
 
-        // Connect to MongoDB
         client = await MongoClient.connect(uri);
         const db = client.db('Careify');
         const bookingsCollection = db.collection('bookings');
 
-        // Add timestamps
         const booking = {
             ...bookingData,
             createdAt: new Date(),
             updatedAt: new Date()
         };
 
-        // Insert booking
         const result = await bookingsCollection.insertOne(booking);
+
+        try {
+            await sendInvoiceEmail({
+                ...booking,
+                _id: result.insertedId
+            });
+        } catch (emailError) {
+            console.error('Invoice email failed:', emailError);
+        }
 
         return NextResponse.json(
             {
@@ -45,13 +50,11 @@ export async function POST(request) {
     } catch (error) {
         console.error('Booking creation error:', error);
         return NextResponse.json(
-            { error: 'Failed to create booking', details: error.message },
+            { error: 'Failed to create booking' },
             { status: 500 }
         );
     } finally {
-        if (client) {
-            await client.close();
-        }
+        if (client) await client.close();
     }
 }
 
@@ -62,12 +65,10 @@ export async function GET(request) {
         const { searchParams } = new URL(request.url);
         const email = searchParams.get('email');
 
-        // Connect to MongoDB
         client = await MongoClient.connect(uri);
         const db = client.db('Careify');
         const bookingsCollection = db.collection('bookings');
 
-        // Get bookings
         const query = email ? { 'customerInfo.email': email } : {};
         const bookings = await bookingsCollection
             .find(query)
@@ -82,12 +83,10 @@ export async function GET(request) {
     } catch (error) {
         console.error('Fetch bookings error:', error);
         return NextResponse.json(
-            { error: 'Failed to fetch bookings', details: error.message },
+            { error: 'Failed to fetch bookings' },
             { status: 500 }
         );
     } finally {
-        if (client) {
-            await client.close();
-        }
+        if (client) await client.close();
     }
 }
