@@ -64,9 +64,9 @@ export default function MyBookingsPage() {
 
             // Check if backend returned success
             if (response.status === 200) {
-                fetchBookings();            // Refresh bookings
-                setEditingBooking(null);    // Close edit mode
-                setNewStatus("");           // Reset status select
+                fetchBookings();
+                setEditingBooking(null);
+                setNewStatus("");
             } else {
                 alert("Failed to update status");
             }
@@ -80,10 +80,10 @@ export default function MyBookingsPage() {
 
     const getStatusBadge = (status) => {
         const styles = {
-            Pending: "bg-warning text-warning",
-            Confirmed: "bg-info text-info",
-            Completed: "bg-success text-success",
-            Cancelled: "bg-error text-error"
+            Pending: "text-warning",
+            Confirmed: "text-info",
+            Completed: "text-success",
+            Cancelled: "text-error"
         };
         return `px-4 py-2 rounded-full text-sm font-bold ${styles[status] || "bg-base-300 text-base-content border-base-300"}`;
     };
@@ -105,7 +105,7 @@ export default function MyBookingsPage() {
         <ProtectedRoute>
             <div className="min-h-screen bg-linear-to-br from-base-200 via-base-100 to-base-200">
                 {/* Header Section */}
-                <div className="bg-linear-to-r from-accent to-accent/80 text-white shadow-2xl">
+                <div className="text-white shadow-2xl">
                     <div className="container mx-auto px-4 py-8">
                         <div className="flex items-center gap-2 text-sm mb-4 text-white/80">
                             <Link href="/" className="hover:text-white transition-colors flex items-center gap-1">

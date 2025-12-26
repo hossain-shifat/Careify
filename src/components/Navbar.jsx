@@ -4,22 +4,24 @@ import { Menu, Moon, Sun } from 'lucide-react';
 import Link from 'next/link';
 import Logo from './Logo';
 import { useSession, signOut } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
     const { theme, toggleTheme } = useTheme();
     const { data: session, status } = useSession();
+    const pathname = usePathname();
 
     const links = (
         <>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/services">Services</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/" className={pathname === '/' ? 'active' : ''}>Home</Link></li>
+            <li><Link href="/services" className={pathname === '/services' ? 'active' : ''}>Services</Link></li>
+            <li><Link href="/contact" className={pathname === '/contact' ? 'active' : ''}>Contact</Link></li>
 
             {
                 session &&
-                    <>
-                        <li><Link href="/my-bookings">My Bookings</Link></li>
-                    </>
+                <>
+                    <li><Link href="/my-bookings" className={pathname === '/my-bookings' ? 'active' : ''}>My Bookings</Link></li>
+                </>
             }
         </>
     )

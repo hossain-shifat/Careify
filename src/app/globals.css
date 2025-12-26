@@ -108,9 +108,9 @@ body::-webkit-scrollbar {
     @apply btn btn-accent bg-transparent hover:bg-accent hover:text-white shadow-accent hover:shadow-2xl text-base-content
 }
 
-/* .active{
+.active{
     @apply text-[#4FC3F7]
-} */
+}
 
 .gradient-text {
   background: var(--color-gradient);
