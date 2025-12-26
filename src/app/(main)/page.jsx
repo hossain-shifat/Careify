@@ -19,7 +19,6 @@ export const metadata = {
         siteName: "Careify",
         images: [
             {
-                url: "/banner1.jpg",
                 width: 1200,
                 height: 630,
                 alt: "Careify - Professional Care Services"
@@ -30,7 +29,6 @@ export const metadata = {
         card: "summary_large_image",
         title: "Careify - Trusted Baby Sitting & Elderly Care Services",
         description: "Book professional caretakers for babysitting, elderly care, and home care services easily and securely.",
-        images: ["/banner1.jpg"]
     },
     alternates: {
         canonical: "https://careify.com"
