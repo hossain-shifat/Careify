@@ -1,20 +1,28 @@
-'use client'
-import { useTheme } from '@/hooks/useTheme'
-import { Menu, Moon, Sun } from 'lucide-react'
-import Link from 'next/link'
-import Logo from './Logo'
+"use client";
+import { useTheme } from '@/hooks/useTheme';
+import { Menu, Moon, Sun } from 'lucide-react';
+import Link from 'next/link';
+import Logo from './Logo';
+import { useSession, signOut } from 'next-auth/react';
 
 const Navbar = () => {
+    const { theme, toggleTheme } = useTheme();
+    const { data: session, status } = useSession();
 
-    const { theme, toggleTheme } = useTheme()
-
-    const links =
+    const links = (
         <>
             <li><Link href="/">Home</Link></li>
             <li><Link href="/services">Services</Link></li>
             <li><Link href="/contact">Contact</Link></li>
-            <li><Link href="/"></Link></li>
+
+            {
+                session &&
+                    <>
+                        <li><Link href="/my-bookings">My Bookings</Link></li>
+                    </>
+            }
         </>
+    )
 
     return (
         <div className="navbar bg-base-200 shadow-sm sticky top-0 z-50 md:px-10">
@@ -46,13 +54,26 @@ const Navbar = () => {
                         }
                     </button>
                 </div>
-                <div className="flex gap-2">
-                    <button className="btn btn-accent font-bold text-white">Login</button>
-                    <Link href='/register' className="btn btn-accent font-bold text-white">Register</Link>
-                </div>
+
+                {status === "loading" ? (
+                    ''
+                ) : session ? (
+                    <div>
+                        <button onClick={() => signOut({ callbackUrl: '/' })} className="btn btn-error btn-outline text-error">Logout</button>
+                    </div>
+                ) : (
+                    <div className="flex gap-2">
+                        <Link href="/login" className="btn btn-accent font-bold text-white">
+                            Login
+                        </Link>
+                        <Link href="/register" className="btn btn-accent font-bold text-white">
+                            Register
+                        </Link>
+                    </div>
+                )}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;

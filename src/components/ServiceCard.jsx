@@ -73,12 +73,8 @@ const ServiceCard = ({ service }) => {
                     </div>
                 </div>
                 <div className="card-actions justify-between items-center mt-auto">
-                    <Link href={`/service/${service._id}`} className="button btn-sm gap-2">
-                        Book Now
-                        <ChevronRight className="w-4 h-4" />
-                    </Link>
-                    <Link href={`/services/${service._id}`} className="button btn-sm gap-2"> View Details <ChevronRight className="w-4 h-4" />
-                    </Link>
+                    <Link href={`/services/${service._id}/book`} className="button btn-sm gap-2">Book Now<ChevronRight className="w-4 h-4" /></Link>
+                    <Link href={`/services/${service._id}`} className="button btn-sm gap-2">View Details<ChevronRight className="w-4 h-4" /></Link>
                 </div>
             </div>
         </div>

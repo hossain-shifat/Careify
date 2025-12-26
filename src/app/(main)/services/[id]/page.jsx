@@ -175,7 +175,7 @@ export default function ServiceDetailPage() {
                             <p className="text-5xl font-bold text-accent">৳{selectedPricing === 'hour' ? service.pricePerHour : service.pricePerDay}</p>
                             <p className="text-base-content/60 mt-2">per {selectedPricing === 'hour' ? 'hour' : 'day'}</p>
                         </div>
-                        <Link href={`/booking/${params.id}`} className="btn btn-accent w-full mb-4">
+                        <Link href={`/services/${params.id}/book`} className="btn btn-accent w-full mb-4">
                             <Calendar className="w-5 h-5" /> Book Now
                         </Link>
                         <div className="flex gap-3">
@@ -262,7 +262,7 @@ export default function ServiceDetailPage() {
                             <p className="text-5xl font-bold text-accent">৳{selectedPricing === 'hour' ? service.pricePerHour : service.pricePerDay}</p>
                             <p className="text-base-content/60 mt-2">per {selectedPricing === 'hour' ? 'hour' : 'day'}</p>
                         </div>
-                        <Link href={`/booking/${params.id}`} className="btn btn-accent w-full mb-4">Book Now</Link>
+                        <Link href={`/services/${params.id}/book`} className="btn btn-accent w-full mb-4">Book Now</Link>
                         <div className="flex gap-3">
                             <button onClick={() => setIsFavorite(!isFavorite)} className={`btn btn-outline flex-1 ${isFavorite ? 'btn-error' : ''}`}>
                                 <Heart className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />
