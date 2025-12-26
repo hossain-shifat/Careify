@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Link from "next/link";
 import { Eye, Edit2, X, MapPin, Clock, Package, ChevronRight, Home } from "lucide-react";
+import axios from "axios";
 
 export default function MyBookingsPage() {
     const { data: session } = useSession();
@@ -52,21 +53,30 @@ export default function MyBookingsPage() {
     };
 
     const handleUpdateStatus = async (bookingId) => {
+        console.log(bookingId)
+        // if (!bookingId) return alert("Invalid booking ID");
+        // if (!newStatus) return alert("Please select a status");
+
         try {
-            const response = await fetch(`/api/bookings/${bookingId}`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ status: newStatus }),
+            const response = await axios.patch(`/api/bookings/${bookingId}`, {
+                status: newStatus
             });
 
-            if (!response.ok) throw new Error("Failed to update status");
-            fetchBookings();
-            setEditingBooking(null);
-            setNewStatus("");
+            // Check if backend returned success
+            if (response.status === 200) {
+                fetchBookings();            // Refresh bookings
+                setEditingBooking(null);    // Close edit mode
+                setNewStatus("");           // Reset status select
+            } else {
+                alert("Failed to update status");
+            }
         } catch (err) {
-            alert("Failed to update status: " + err.message);
+            // Axios error handling
+            const message = err.response?.data?.error || err.message;
+            alert("Failed to update status: " + message);
+            console.error("Update status error:", err);
         }
-    };
+    }
 
     const getStatusBadge = (status) => {
         const styles = {

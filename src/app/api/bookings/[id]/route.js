@@ -1,90 +1,68 @@
+// src/app/api/bookings/[id]/route.js
 import { NextResponse } from "next/server";
-import { MongoClient, ObjectId } from "mongodb";
+import connectDB from "@/lib/mongodb";
+import Booking from "@/models/Booking";
+import mongoose from "mongoose";
 
-const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri);
-
+// PATCH: Update booking status
 export async function PATCH(request, { params }) {
     try {
-        const { id } = params;
-        const body = await request.json();
-        const { status } = body;
+        await connectDB();
 
-        // Validate status
-        const validStatuses = ["Pending", "Confirmed", "Completed", "Cancelled"];
-        if (!validStatuses.includes(status)) {
+        // Next.js 15+ requires awaiting params
+        const { id } = await params;
+
+        console.log("Received booking ID:", id); // Debug log
+
+        // Validate MongoDB ObjectId
+        if (!mongoose.Types.ObjectId.isValid(id)) {
             return NextResponse.json(
-                { error: "Invalid status value" },
+                { error: "Invalid booking ID format" },
                 { status: 400 }
             );
         }
 
-        // Connect to MongoDB
-        await client.connect();
-        const database = client.db("Careify");
-        const bookings = database.collection("bookings");
+        const body = await request.json();
+        const { status } = body;
 
-        // Update the booking status
-        const result = await bookings.updateOne(
-            { _id: new ObjectId(id) },
-            {
-                $set: {
-                    status: status,
-                    updatedAt: new Date()
-                }
-            }
+        console.log("Received status:", status); // Debug log
+
+        // Validate status
+        const validStatuses = ["Pending", "Confirmed", "Completed", "Cancelled"];
+        if (!status || !validStatuses.includes(status)) {
+            return NextResponse.json(
+                { error: `Invalid status. Must be one of: ${validStatuses.join(', ')}. Received: ${status}` },
+                { status: 400 }
+            );
+        }
+
+        // Find and update the booking
+        const updatedBooking = await Booking.findByIdAndUpdate(
+            id,
+            { status, updatedAt: new Date() },
+            { new: true, runValidators: true }
         );
 
-        if (result.matchedCount === 0) {
+        if (!updatedBooking) {
             return NextResponse.json(
                 { error: "Booking not found" },
                 { status: 404 }
             );
         }
 
-        return NextResponse.json({
-            message: "Booking status updated successfully",
-            status: status
-        });
+        return NextResponse.json(
+            {
+                message: "Booking status updated successfully",
+                booking: updatedBooking
+            },
+            { status: 200 }
+        );
 
     } catch (error) {
         console.error("Error updating booking:", error);
         return NextResponse.json(
-            { error: "Failed to update booking status" },
+            { error: "Failed to update booking status: " + error.message },
             { status: 500 }
         );
-    } finally {
-        await client.close();
-    }
-}
-
-export async function GET(request, { params }) {
-    try {
-        const { id } = params;
-
-        await client.connect();
-        const database = client.db("Careify");
-        const bookings = database.collection("bookings");
-
-        // Get the booking by ID
-        const booking = await bookings.findOne({ _id: new ObjectId(id) });
-
-        if (!booking) {
-            return NextResponse.json(
-                { error: "Booking not found" },
-                { status: 404 }
-            );
-        }
-
-        return NextResponse.json({ booking });
-
-    } catch (error) {
-        console.error("Error fetching booking:", error);
-        return NextResponse.json(
-            { error: "Failed to fetch booking" },
-            { status: 500 }
-        );
-    } finally {
-        await client.close();
     }
 }
