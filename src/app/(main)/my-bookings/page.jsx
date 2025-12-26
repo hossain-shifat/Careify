@@ -1,11 +1,10 @@
-// src/app/(main)/my-bookings/page.jsx
 "use client";
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Link from "next/link";
-import { Eye, Edit2, X, Calendar, MapPin, Clock, Package, ChevronRight, Home } from "lucide-react";
+import { Eye, Edit2, X, MapPin, Clock, Package, ChevronRight, Home } from "lucide-react";
 
 export default function MyBookingsPage() {
     const { data: session } = useSession();
@@ -17,9 +16,9 @@ export default function MyBookingsPage() {
 
     useEffect(() => {
         if (session?.user?.id) {
-            fetchBookings();
+            fetchBookings()
         }
-    }, [session]);
+    }, [session])
 
     const fetchBookings = async () => {
         try {
