@@ -6,15 +6,24 @@ import { useEffect, useState } from "react";
 
 export default function NotFound() {
     const [mounted, setMounted] = useState(false);
+    const [floatingElements, setFloatingElements] = useState([]);
 
     useEffect(() => {
         setMounted(true);
+        // Generate random positions after mount (client-side only)
+        const elements = Array.from({ length: 6 }, () => ({
+            left: Math.random() * 100,
+            top: Math.random() * 100,
+            delay: Math.random() * 3,
+            duration: 3 + Math.random() * 4
+        }));
+        setFloatingElements(elements);
     }, []);
 
     if (!mounted) return null;
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-base-100 via-base-200 to-base-300 flex items-center justify-center p-4 overflow-hidden relative">
+        <div className="min-h-screen bg-gradient-to-br from-base-100 via-base-200 to-base-300 flex items-center justify-center p-4 overflow-hidden relative">
             {/* Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-pulse"></div>
@@ -28,7 +37,7 @@ export default function NotFound() {
                 <div className="mb-8 flex justify-center">
                     <div className="relative">
                         <div className="absolute inset-0 bg-accent/20 blur-2xl rounded-full animate-pulse"></div>
-                        <div className="relative bg-linear-to-br from-accent/20 to-primary/20 backdrop-blur-sm border-4 border-accent/30 rounded-full p-12 shadow-2xl">
+                        <div className="relative bg-gradient-to-br from-accent/20 to-primary/20 backdrop-blur-sm border-4 border-accent/30 rounded-full p-12 shadow-2xl">
                             <SearchX className="w-24 h-24 text-accent animate-bounce" strokeWidth={1.5} />
                         </div>
                     </div>
@@ -36,10 +45,10 @@ export default function NotFound() {
 
                 {/* 404 Text */}
                 <div className="mb-6">
-                    <h1 className="text-9xl md:text-[12rem] font-black mb-4 leading-none">
+                    <h1 className="text-9xl md:text-[12rem] font-black mb-4 leading-none bg-gradient-to-r from-accent via-primary to-accent bg-clip-text text-transparent">
                         404
                     </h1>
-                    <div className="h-1 w-32 mx-auto bg-linear-to-r from-transparent via-accent to-transparent rounded-full"></div>
+                    <div className="h-1 w-32 mx-auto bg-gradient-to-r from-transparent via-accent to-transparent rounded-full"></div>
                 </div>
 
                 {/* Error Message */}
@@ -89,15 +98,15 @@ export default function NotFound() {
 
             {/* Floating Animation Elements */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                {[...Array(6)].map((_, i) => (
+                {floatingElements.map((element, i) => (
                     <div
                         key={i}
                         className="absolute w-2 h-2 bg-accent/30 rounded-full animate-float"
                         style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                            animationDelay: `${Math.random() * 3}s`,
-                            animationDuration: `${3 + Math.random() * 4}s`
+                            left: `${element.left}%`,
+                            top: `${element.top}%`,
+                            animationDelay: `${element.delay}s`,
+                            animationDuration: `${element.duration}s`
                         }}
                     ></div>
                 ))}
