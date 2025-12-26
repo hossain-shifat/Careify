@@ -1,5 +1,6 @@
 import AuthProvider from "@/components/AuthProvider";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
     title: "Careify - Trusted Care Services",
@@ -12,6 +13,17 @@ export default function RootLayout({ children }) {
             <body>
                 <AuthProvider>
                     {children}
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={3000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                    />
                 </AuthProvider>
             </body>
         </html>

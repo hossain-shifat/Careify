@@ -6,6 +6,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Link from "next/link";
 import { Eye, Edit2, X, MapPin, Clock, Package, ChevronRight, Home } from "lucide-react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function MyBookingsPage() {
     const { data: session } = useSession();
@@ -48,14 +49,14 @@ export default function MyBookingsPage() {
             if (!response.ok) throw new Error("Failed to cancel booking");
             fetchBookings();
         } catch (err) {
-            alert("Failed to cancel booking: " + err.message);
+            toast.success("Failed to cancel booking: " + err.message);
         }
     };
 
     const handleUpdateStatus = async (bookingId) => {
         console.log(bookingId)
-        // if (!bookingId) return alert("Invalid booking ID");
-        // if (!newStatus) return alert("Please select a status");
+        // if (!bookingId) return toast.success("Invalid booking ID");
+        // if (!newStatus) return toast.success("Please select a status");
 
         try {
             const response = await axios.patch(`/api/bookings/${bookingId}`, {
@@ -68,12 +69,12 @@ export default function MyBookingsPage() {
                 setEditingBooking(null);
                 setNewStatus("");
             } else {
-                alert("Failed to update status");
+                toast.success("Failed to update status");
             }
         } catch (err) {
             // Axios error handling
             const message = err.response?.data?.error || err.message;
-            alert("Failed to update status: " + message);
+            toast.success("Failed to update status: " + message);
             console.error("Update status error:", err);
         }
     }
@@ -184,7 +185,7 @@ export default function MyBookingsPage() {
                                         </thead>
                                         <tbody>
                                             {bookings.map((booking, index) => (
-                                                <tr key={booking._id} className="hover:bg-accent text-center transition-all border-b border-base-200">
+                                                <tr key={booking._id} className="text-center transition-all border-b border-base-200">
                                                     <td className="font-bold text-accent text-lg">#{index + 1}</td>
                                                     <td>
                                                         <div className="font-bold text-base-content text-lg">{booking.serviceName || "Service"}</div>

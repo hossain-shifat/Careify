@@ -401,35 +401,35 @@ export default function BookingPage() {
                                                     </select>
                                                     {errors.area && <span className="text-error text-xs mt-1">{errors.area.message}</span>}
                                                 </div>
-                                                <div className="md:flex">
-                                                    <div className="form-control">
-                                                        <label className="label">
-                                                            <span className="label-text font-medium">
-                                                                Detailed Address <span className="text-error">*</span>
-                                                            </span>
-                                                        </label>
-                                                        <textarea
-                                                            {...register('address', { required: 'Address is required' })}
-                                                            className={`w-full p-3 bg-base-100 rounded-xl border focus-within:outline outline-[#94A3B8] placeholder:text-[#94A3B8] text-base-content text-md ${errors.address ? 'textarea-error' : ''
-                                                                }`}
-                                                            rows={4}
-                                                            placeholder="House/Flat number, Street, Landmark..."
-                                                        />
-                                                        {errors.address && (
-                                                            <span className="text-error text-xs mt-1">
-                                                                {errors.address.message}
-                                                            </span>
-                                                        )}
-                                                    </div>
-                                                    <div className="form-control">
-                                                        <label className="label">
-                                                            <span className="label-text font-medium">
-                                                                Special Requirements (Optional)
-                                                            </span>
-                                                        </label>
-                                                        <textarea {...register('specialRequirements')} className="w-full p-3 bg-base-100 rounded-xl border focus-within:outline outline-[#94A3B8] placeholder:text-[#94A3B8] text-base-content text-md" rows={4} placeholder="Any specific needs or preferences..." />
-                                                    </div>
-                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="md:flex md:justify-between gap-4">
+                                            <div className="flex-1 form-control">
+                                                <label className="label">
+                                                    <span className="label-text font-medium">
+                                                        Detailed Address <span className="text-error">*</span>
+                                                    </span>
+                                                </label>
+                                                <textarea
+                                                    {...register('address', { required: 'Address is required' })}
+                                                    className={`w-full p-3 bg-base-100 rounded-xl border focus-within:outline outline-[#94A3B8] placeholder:text-[#94A3B8] text-base-content text-md ${errors.address ? 'textarea-error' : ''
+                                                        }`}
+                                                    rows={4}
+                                                    placeholder="House/Flat number, Street, Landmark..."
+                                                />
+                                                {errors.address && (
+                                                    <span className="text-error text-xs mt-1">
+                                                        {errors.address.message}
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <div className="flex-1 form-control">
+                                                <label className="label">
+                                                    <span className="label-text font-medium">
+                                                        Special Requirements (Optional)
+                                                    </span>
+                                                </label>
+                                                <textarea {...register('specialRequirements')} className="w-full p-3 bg-base-100 rounded-xl border focus-within:outline outline-[#94A3B8] placeholder:text-[#94A3B8] text-base-content text-md" rows={4} placeholder="Any specific needs or preferences..." />
                                             </div>
                                         </div>
                                         <div className="my-4">

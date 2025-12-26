@@ -2,12 +2,13 @@
 
 import { useForm } from "react-hook-form";
 import { Mail, Phone, MapPin, Globe } from "lucide-react";
+import { toast } from "react-toastify";
 
 export default function ContactPage() {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        alert("Thank you! Your message has been sent.");
+        toast.success("Thank you! Your message has been sent.");
     };
 
     return (
