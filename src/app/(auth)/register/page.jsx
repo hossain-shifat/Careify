@@ -110,7 +110,7 @@ export default function RegisterPage() {
                                 <label htmlFor="name" className="block text-sm font-medium text-base-content">
                                     Full Name <span className="text-error">*</span>
                                 </label>
-                                <div className="input relative">
+                                <div className="relative">
                                     <input id="name" type="text" {...register("name", { required: "Name is required", minLength: { value: 2, message: "Name must be at least 2 characters" } })} className={`w-full p-3 bg-base-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent transition-all ${errors.name ? "border-error" : "border-base-300"}`} placeholder="Enter your full name" />
                                 </div>
                                 {errors.name && (
